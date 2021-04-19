@@ -22,7 +22,7 @@ CREATE TABLE product (
 	id integer PRIMARY KEY AUTO_INCREMENT,
 	name varchar(255) not null,
 	description varchar(255) not null,
-	category_id integer,
+	category_id integer not null,
 	date_register timestamp not null,
 	score double default(0),
 	FOREIGN KEY(category_id) REFERENCES category(id)

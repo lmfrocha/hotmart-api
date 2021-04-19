@@ -23,10 +23,10 @@ public class Category implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@NotNull
 	@Column(name = "name", nullable = false)
-	private String nome;
+	private String name;
 
 }

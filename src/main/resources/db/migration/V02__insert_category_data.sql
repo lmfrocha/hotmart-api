@@ -1,0 +1,10 @@
+insert into category(id, name) values(1,'Classifieds');
+insert into category(id, name) values(2,'Clothing & Accessories');
+insert into category(id, name) values(3,'Deals');
+insert into category(id, name) values(4,'Electronics');
+insert into category(id, name) values(5,'Entertainment');
+insert into category(id, name) values(6,'Family'); 
+insert into category(id, name) values(7,'Hobbies');
+insert into category(id, name) values(8,'Home & Garden');
+insert into category(id, name) values(9,'Housing');
+insert into category(id, name) values(10,'Vehicles');
