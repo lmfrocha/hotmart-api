@@ -1,5 +1,7 @@
 package br.com.hotmart.api.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import br.com.hotmart.api.model.Category;
 import br.com.hotmart.api.model.Product;
 
 @Repository
@@ -20,7 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 			+ "c.name asc")
 	Page<Product> findAllBy(Pageable pageable);
 	
-	
 	@Query("from Product p "
 			+ "inner join p.category as c "
 			+ "WHERE "
@@ -33,4 +35,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 			+ "c.name asc")
 	Page<Product> search(@Param("searchTerm") String searchTerm, Pageable pageable);
 
+	List<Product> findAllByCategory(Category category);
+	
 }

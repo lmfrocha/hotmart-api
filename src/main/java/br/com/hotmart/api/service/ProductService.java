@@ -47,6 +47,6 @@ public class ProductService {
 	public ProductDTO findBy(Long id) {
 		Product product = repository.findById(id).get();
 		return Objects.nonNull(product) ? modelMapper.map(product, ProductDTO.class) : null;
-	} 
-	
+	}
+
 }

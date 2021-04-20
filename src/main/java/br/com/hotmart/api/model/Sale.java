@@ -2,7 +2,6 @@ package br.com.hotmart.api.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,7 +45,4 @@ public class Sale implements Serializable {
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 	
-	@Column(name = "assessment")
-	private Integer assessment;
-
 }

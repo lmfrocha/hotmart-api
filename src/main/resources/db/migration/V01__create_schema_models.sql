@@ -31,16 +31,24 @@ CREATE TABLE product (
 CREATE TABLE assessment (
 	id integer PRIMARY KEY AUTO_INCREMENT,
 	sale_id integer not null,
-	score integer not null
+	score integer not null,
+	date_register timestamp not null
 );
 
 CREATE TABLE sale (
 	id integer PRIMARY KEY AUTO_INCREMENT,
-	assessment integer,
 	buyer_id integer not null,
 	product_id integer not null,
 	seller_id integer not null,
 	FOREIGN KEY(seller_id) REFERENCES seller(id),
 	FOREIGN KEY(buyer_id) REFERENCES buyer(id),
 	FOREIGN KEY(product_id) REFERENCES product(id)
+);
+
+CREATE TABLE news_category (
+	id integer PRIMARY KEY AUTO_INCREMENT,
+	category_id integer not null,
+	total_results integer not null,
+	consultation_date timestamp not null,
+	FOREIGN KEY(category_id) REFERENCES category(id)
 );
