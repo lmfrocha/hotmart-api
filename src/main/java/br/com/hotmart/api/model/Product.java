@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -41,6 +42,7 @@ public class Product implements Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@Column(name = "date_register", updatable = false)
 	private LocalDateTime dateRegister;
 
