@@ -13,11 +13,9 @@ import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "news_category")
 public class NewsCategory {

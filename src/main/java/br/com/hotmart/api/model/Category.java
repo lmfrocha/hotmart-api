@@ -8,14 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "category")
 public class Category implements Serializable {
@@ -26,6 +25,7 @@ public class Category implements Serializable {
 	private Long id;
 
 	@NotNull
+	@Size(max = 50)
 	@Column(name = "name", nullable = false)
 	private String name;
 

@@ -20,6 +20,7 @@ import br.com.hotmart.api.repository.AssessmentRepository;
 import br.com.hotmart.api.repository.CategegoryRepository;
 import br.com.hotmart.api.repository.NewsCategoryRepository;
 import br.com.hotmart.api.repository.ProductRepository;
+import br.com.hotmart.api.web.NewsApiResponse;
 
 @Service
 public class RankingService {
@@ -31,7 +32,7 @@ public class RankingService {
 	private CategegoryRepository categoryRepository;
 	
 	@Autowired
-	private EndpointProperties endpointProperties;
+	private NewsApiResponse api;
 	
 	@Autowired
 	private NewsCategoryRepository newsCategoryRepository;
@@ -65,25 +66,17 @@ public class RankingService {
 					nc = new NewsCategory();
 					nc.setCategory(c);
 					nc.setConsultationDate(LocalDateTime.now());
-					nc.setTotalResults(cathNewsCategory(c));
+					nc.setTotalResults(api.getNewsByCategory(c));
 					newsCategoryRepository.save(nc);
 				} else {
-					nc.setTotalResults(cathNewsCategory(c));
+					nc.setTotalResults(api.getNewsByCategory(c));
 					newsCategoryRepository.save(nc);
 				}
 			});
 		}
 	}
 	
-	private Long cathNewsCategory(Category category) {
-		String url = endpointProperties.getProperties().getProperty("news-api.url") 
-				+ "country=" + endpointProperties.getProperties().getProperty("news-api.country") + "&" 
-				+ "category=" + category.getName() + "&" 
-				+ "apiKey="	+ endpointProperties.getProperties().getProperty("news-api.apikey");
-		RestTemplate restTemplate = new RestTemplate();
-		NewsApiResponseDTO response = restTemplate.getForObject(url, NewsApiResponseDTO.class, "totalResults");
-		return response.getTotalResults();
-	}
+	
 	
 	private Double getScore(Category c, Product p, Map<Category, Long> quantityPerCategory) {
 		Double score = 0D;

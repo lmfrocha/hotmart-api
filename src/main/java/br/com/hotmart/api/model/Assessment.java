@@ -14,15 +14,9 @@ import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "assessment")
 public class Assessment {
@@ -36,10 +30,10 @@ public class Assessment {
 	@JoinColumn(name = "sale_id")
 	private Sale sale;
 	
-	@Column(name = "score")
+	@Column(name = "score", nullable = true)
 	private Integer score;
 	
-	@Column(name = "date_register")
+	@Column(name = "date_register", nullable = false)
 	private LocalDateTime dateRegister;
 	
 	@PrePersist
