@@ -3,7 +3,6 @@ package br.com.hotmart.api.resource;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotmart.api.model.Product;
+import br.com.hotmart.api.model.dto.ProductDTO;
+import br.com.hotmart.api.model.dto.ProductListDTO;
 import br.com.hotmart.api.repository.ProductRepository;
 import br.com.hotmart.api.service.ProductService;
 
@@ -29,7 +31,7 @@ public class ProductResource {
 	
 	@Autowired
 	private ProductService service;
-
+	
 	@PostMapping
 	private ResponseEntity<?> create(@RequestBody Product product) {
 		Product newProduct = repository.save(product);
@@ -37,9 +39,9 @@ public class ProductResource {
 	}
 
 	@GetMapping("/id/{id}")
-	private ResponseEntity<?> findById(@PathVariable("id") Long id){
-		Product product = repository.findById(id).get();
-		return Objects.nonNull(product) ? ResponseEntity.status(HttpStatus.OK).body(product):ResponseEntity.notFound().build();
+	private ResponseEntity<ProductDTO> findById(@PathVariable("id") Long id){
+		ProductDTO productDTO = service.findBy(id);
+		return Objects.nonNull(productDTO) ? ResponseEntity.status(HttpStatus.OK).body(productDTO):ResponseEntity.notFound().build();
 	}
 	
 	@PutMapping("/id/{id}")
@@ -60,8 +62,14 @@ public class ProductResource {
 	
 	@GetMapping("/")
 	private ResponseEntity<?> getAll(Pageable pageable){
-		Page<Product> list = repository.findAllBy(pageable);
-		return list.getSize() >0 ? ResponseEntity.ok(list):ResponseEntity.noContent().build();
+		ProductListDTO response = service.findAllBy(pageable);
+		return response.getProducts().getSize() >0 ? ResponseEntity.ok(response):ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("/search")
+	private ResponseEntity<?> searchAll(@RequestParam("searchTerm") String searchTerm, Pageable pageable){
+		ProductListDTO response = service.searchAllBy(searchTerm, pageable);
+		return response.getProducts().getSize() >0 ? ResponseEntity.ok(response):ResponseEntity.noContent().build();
 	}
 	
 }
