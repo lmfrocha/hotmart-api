@@ -21,6 +21,7 @@ import br.com.hotmart.api.model.dto.ProductDTO;
 import br.com.hotmart.api.model.dto.ProductListDTO;
 import br.com.hotmart.api.repository.ProductRepository;
 import br.com.hotmart.api.service.ProductService;
+import br.com.hotmart.api.service.RankingService;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -31,6 +32,18 @@ public class ProductResource {
 	
 	@Autowired
 	private ProductService service;
+	
+	@Autowired
+	private RankingService rank;
+	
+	@GetMapping("/init")
+	private ResponseEntity<?> init(){
+		
+		rank.updateNewsCategoryResults();
+		rank.updateProductScoreByCategory();
+		
+		return ResponseEntity.ok("startou");
+	}
 	
 	@PostMapping
 	private ResponseEntity<?> create(@RequestBody Product product) {

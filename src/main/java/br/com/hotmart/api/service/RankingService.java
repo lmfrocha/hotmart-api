@@ -45,11 +45,8 @@ public class RankingService {
 		
 		if(categoryList.size() > 0) {
 			categoryList.forEach(c -> {
-				//calcular quantidade por categoria
 				quantityPerCategory.put(c, newsCategoryRepository.findByCategory(c).getTotalResults());
-				//listar produtos por categoria
 				List<Product> productList = productRepository.findAllByCategory(c);
-				//atribui o score para cada produto
 				productList.forEach(p -> {
 					Double score = getScore(c, p, quantityPerCategory);
 					p.setScore(score);
@@ -77,7 +74,6 @@ public class RankingService {
 			});
 		}
 	}
-	
 	
 	private Long cathNewsCategory(Category category) {
 		String url = endpointProperties.getProperties().getProperty("news-api.url") 
