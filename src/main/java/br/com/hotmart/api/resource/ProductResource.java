@@ -21,10 +21,9 @@ import br.com.hotmart.api.model.dto.ProductDTO;
 import br.com.hotmart.api.model.dto.ProductListDTO;
 import br.com.hotmart.api.repository.ProductRepository;
 import br.com.hotmart.api.service.ProductService;
-import br.com.hotmart.api.service.RankingService;
 
 /**
- * 
+ * Controller that makes resources available to handle the resources of the Product entity
  * @author l.rocha
  *
  */
@@ -38,54 +37,74 @@ public class ProductResource {
 	@Autowired
 	private ProductService service;
 	
-	@Autowired
-	private RankingService rank;
-	
-	@GetMapping("/init")
-	private ResponseEntity<?> init(){
-		
-		rank.updateNewsCategoryResults();
-		rank.updateProductScoreByCategory();
-		
-		return ResponseEntity.ok("startou");
-	}
-	
+	/**
+	 * Create a product
+	 * @param product
+	 * @return ResponseEntity<Product>
+	 */
 	@PostMapping
 	private ResponseEntity<?> create(@RequestBody Product product) {
 		Product newProduct = repository.save(product);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
 	}
 
+	/**
+	 * Return product by Id
+	 * @param id
+	 * @return ResponseEntity<ProductDTO>
+	 */
 	@GetMapping("/id/{id}")
 	private ResponseEntity<ProductDTO> findById(@PathVariable("id") Long id){
 		ProductDTO productDTO = service.findBy(id);
 		return Objects.nonNull(productDTO) ? ResponseEntity.status(HttpStatus.OK).body(productDTO) : ResponseEntity.notFound().build();
 	}
 	
+	/**
+	 * Updates a product resource
+	 * @param id
+	 * @param product
+	 * @return ResponseEntity<ProductDTO>
+	 */
 	@PutMapping("/id/{id}")
-	private ResponseEntity<?> update(@PathVariable Long id, @RequestBody Product product) {
+	private ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody Product product) {
 		try {
-			Product oldProduct = service.update(id, product);
+			ProductDTO oldProduct = service.update(id, product);
 			return ResponseEntity.ok(oldProduct);
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.notFound().build();
 		}
 	}
 	
+	/**
+	 * Delete a product resource by id
+	 * @param id
+	 * @return ResponseEntity<HttpStatus.noContent>
+	 */
 	@DeleteMapping("/id/{id}")
 	private ResponseEntity<?> delete(@PathVariable Long id) {
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	/**
+	 * Search all products using pagination
+	 * @param pageable
+	 * @return ResponseEntity<ProductListDTO>
+	 */
 	@GetMapping("/")
-	private ResponseEntity<?> getAll(Pageable pageable){
+	private ResponseEntity<ProductListDTO> getAll(Pageable pageable){
 		ProductListDTO response = service.findAllBy(pageable);
 		return response.getProducts().getSize() >0 ? ResponseEntity.ok(response):ResponseEntity.noContent().build();
 	}
 
+	/**
+	 * Search all products using pagination and search term
+	 * @param searchTerm
+	 * @param pageable
+	 * @return ResponseEntity<ProductListDTO>
+	 */
 	@GetMapping("/search")
-	private ResponseEntity<?> searchAll(@RequestParam("searchTerm") String searchTerm, Pageable pageable){
+	private ResponseEntity<ProductListDTO> searchAll(@RequestParam("searchTerm") String searchTerm, Pageable pageable){
 		ProductListDTO response = service.searchAllBy(searchTerm, pageable);
 		return response.getProducts().getSize() >0 ? ResponseEntity.ok(response):ResponseEntity.noContent().build();
 	}

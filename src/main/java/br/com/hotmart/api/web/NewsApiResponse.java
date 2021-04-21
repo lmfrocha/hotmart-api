@@ -10,7 +10,7 @@ import br.com.hotmart.api.model.Category;
 import br.com.hotmart.api.model.dto.NewsApiResponseDTO;
 
 /**
- * 
+ * Class that consumes the news API
  * @author l.rocha
  *
  */
@@ -20,6 +20,11 @@ public class NewsApiResponse {
 	@Autowired
 	private EndpointProperties endpointProperties;
 	
+	/**
+	 * Method that consumes the api
+	 * @param category
+	 * @return Long amount of news by category
+	 */
 	public Long getNewsByCategory(Category category) {
 		String url = endpointProperties.getProperties().getProperty("news-api.url") 
 				+ "country=" + endpointProperties.getProperties().getProperty("news-api.country") + "&" 

@@ -20,7 +20,7 @@ import br.com.hotmart.api.repository.ProductRepository;
 import br.com.hotmart.api.web.NewsApiResponse;
 
 /**
- * 
+ * Class responsible for performing ranking operations
  * @author l.rocha
  *
  */
@@ -42,6 +42,12 @@ public class RankingService {
 	@Autowired
 	private AssessmentRepository assessmentRepository;
 	
+	/**
+	 * Method that loads all registered categories where 
+	 * the amount of news and products related to it is loaded 
+	 * one at a time, where the list of products is scrolled one by one, 
+	 * updating its Score attribute
+	 */
 	public void updateProductScoreByCategory() {
 		Map<Category, Long> quantityPerCategory = new LinkedHashMap<>();
 		List<Category> categoryList = categoryRepository.findAll();
@@ -59,8 +65,14 @@ public class RankingService {
 		}
 	}
 	
+	/**
+	 * Method that lists all the categories registered in the system and 
+	 * through an external api updates the amount of harmfulness related 
+	 * to the category.
+	 */
 	public void updateNewsCategoryResults() {
 		List<Category> categoryList = categoryRepository.findAll();
+		
 		if(categoryList.size() > 0) {
 			categoryList.forEach(c-> {
 				NewsCategory nc = newsCategoryRepository.findByCategory(c);
@@ -78,13 +90,22 @@ public class RankingService {
 		}
 	}
 	
-	
-	
-	private Double getScore(Category c, Product p, Map<Category, Long> quantityPerCategory) {
+	/**
+	 * Score calculation method:
+	 * • X = Average product evaluation over the last 12 months
+	 * • Y = Quantity of sales / days that the product exists
+	 * • Z = Quantity of news from the product category on the current day
+	 *	Score = (X + Y + Z)
+	 * @param category
+	 * @param product
+	 * @param quantityPerCategory
+	 * @return Score
+	 */
+	private Double getScore(Category category, Product product, Map<Category, Long> quantityPerCategory) {
 		Double score = 0D;
-		Double x = assessmentRepository.getAvgScoreByProductAndDateRegister(p, LocalDateTime.now().minusYears(1));
-		Double y = ((double) productRepository.count() / (double)ChronoUnit.DAYS.between(p.getDateRegister().toLocalDate(), LocalDateTime.now()));
-		Double z = (double) quantityPerCategory.get(c).longValue();
+		Double x = assessmentRepository.getAvgScoreByProductAndDateRegister(product, LocalDateTime.now().minusYears(1));
+		Double y = ((double) productRepository.count() / (double)ChronoUnit.DAYS.between(product.getDateRegister().toLocalDate(), LocalDateTime.now()));
+		Double z = (double) quantityPerCategory.get(category).longValue();
 		return score + (x != null ? x : 0D) + (y != null ? y : 0D) + z;
 	}
 }

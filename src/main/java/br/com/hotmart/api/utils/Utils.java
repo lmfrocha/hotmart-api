@@ -10,9 +10,13 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Utils {
 
+	/**
+	 * 
+	 * @return New Date in Pattern(dd-MM-yyyy HH:mm:ss)
+	 */
 	public static String getDateFormatted() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		return LocalDateTime.now().format(formatter);
 	}
-	
+
 }
