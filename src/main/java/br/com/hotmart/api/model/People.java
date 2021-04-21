@@ -11,6 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import lombok.Data;
 
 /**
@@ -18,6 +20,7 @@ import lombok.Data;
  * @author l.rocha
  *
  */
+@Audited
 @Data
 @Entity
 @Table(name = "people")

@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.sun.istack.NotNull;
 
 import lombok.Data;
@@ -21,6 +23,7 @@ import lombok.Data;
  * @author l.rocha
  *
  */
+@Audited
 @Data
 @Entity
 @Table(name = "assessment")

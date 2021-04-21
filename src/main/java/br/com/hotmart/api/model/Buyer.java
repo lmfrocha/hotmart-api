@@ -6,6 +6,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.PrePersist;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import org.hibernate.envers.Audited;
+
 import br.com.hotmart.api.model.enums.PeopleType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,6 +17,7 @@ import lombok.EqualsAndHashCode;
  * @author l.rocha
  *
  */
+@Audited
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity

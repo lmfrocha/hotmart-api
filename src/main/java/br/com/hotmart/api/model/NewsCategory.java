@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.sun.istack.NotNull;
 
 import lombok.Data;
@@ -20,6 +22,7 @@ import lombok.Data;
  * @author l.rocha
  *
  */
+@Audited
 @Data
 @Entity
 @Table(name = "news_category")

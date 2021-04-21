@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.NotNull;
 
@@ -23,6 +25,7 @@ import lombok.Data;
  * @author l.rocha
  *
  */
+@Audited
 @Data
 @Entity
 @Table(name = "product")
