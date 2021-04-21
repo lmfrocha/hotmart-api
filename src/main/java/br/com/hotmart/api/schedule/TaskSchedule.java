@@ -32,9 +32,9 @@ public class TaskSchedule {
 	}
 	
 	/**
-	 * Repeat after every day at 00:01
+	 * Repeat after every day at 01:00
 	 */
-	@Scheduled(cron = "0/1 0 0 * * *")
+	@Scheduled(cron = "0 0 0/1 * * *")
 	public void taskUpdateProductScore() {
 		LOGGER.info("START: Update Product Score by category ");
 		rankingService.updateProductScoreByCategory();
