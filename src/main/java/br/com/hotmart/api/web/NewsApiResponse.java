@@ -26,10 +26,10 @@ public class NewsApiResponse {
 	 * @return Long amount of news by category
 	 */
 	public Long getNewsByCategory(Category category) {
-		String url = endpointProperties.getProperties().getProperty("news-api.url") 
-				+ "country=" + endpointProperties.getProperties().getProperty("news-api.country") + "&" 
+		String url = endpointProperties.getUrl() 
+				+ "country=" + endpointProperties.getCountry() + "&" 
 				+ "category=" + category.getName() + "&" 
-				+ "apiKey="	+ endpointProperties.getProperties().getProperty("news-api.apikey");
+				+ "apiKey="	+ endpointProperties.getApiKey();
 		
 		RestTemplate restTemplate = new RestTemplate();
 		NewsApiResponseDTO response = null;

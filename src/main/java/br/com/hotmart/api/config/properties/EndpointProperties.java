@@ -1,50 +1,47 @@
 package br.com.hotmart.api.config.properties;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Class to load the endpoint properties saved in the endpoint.properties file
+ * 
  * @author l.rocha
  *
  */
 @Configuration
 public class EndpointProperties {
-	private Properties properties;
 	
-	/**
-	 * Constructor
-	 */
-	public EndpointProperties() {
-		try {
-			this.properties = getProp();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	@Value("${news-api.url}")
+	private String url;
+	
+	@Value("${news-api.country}")
+	private String country;
+	
+	@Value("${news-api.apikey}")
+	private String apiKey;
+
+	public String getUrl() {
+		return url;
 	}
-	
-	/**
-	 * Load all Properties loaded by file
-	 * @return Properties
-	 * @throws IOException
-	 */
-	private static Properties getProp() throws IOException {
-		Properties props = new Properties();
-		FileInputStream file = new FileInputStream(
-				".\\src\\main\\resources\\endpoint.properties");
-		props.load(file);
-		return props;
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
-	
-	/**
-	 * Public method to return properties
-	 * @return properties
-	 */
-	public Properties getProperties() {
-		return this.properties;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
 	
 }
