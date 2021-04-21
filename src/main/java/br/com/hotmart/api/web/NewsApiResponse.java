@@ -9,9 +9,14 @@ import br.com.hotmart.api.config.properties.EndpointProperties;
 import br.com.hotmart.api.model.Category;
 import br.com.hotmart.api.model.dto.NewsApiResponseDTO;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Service
 public class NewsApiResponse {
-
+	
 	@Autowired
 	private EndpointProperties endpointProperties;
 	
@@ -23,7 +28,6 @@ public class NewsApiResponse {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		NewsApiResponseDTO response = null;
-		
 		try {
 			response = restTemplate.getForObject(url, NewsApiResponseDTO.class, "totalResults");
 		} catch (RestClientException e) {

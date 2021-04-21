@@ -2,15 +2,14 @@ package br.com.hotmart.api.model.dto;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+/**
+ * 
+ * @author l.rocha
+ *
+ */
+@Data
 public class NewsApiResponseDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 

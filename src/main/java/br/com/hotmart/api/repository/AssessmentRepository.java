@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 import br.com.hotmart.api.model.Assessment;
 import br.com.hotmart.api.model.Product;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Repository
 public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
 
@@ -20,8 +25,4 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
 			+ "p =:product"
 			)
 	Double getAvgScoreByProductAndDateRegister(Product product, LocalDateTime dateTime);
-	
 }
-
-
-//Média de avaliação do produto nos últimos 12 meses

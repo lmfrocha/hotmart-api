@@ -14,6 +14,11 @@ import com.sun.istack.NotNull;
 
 import lombok.Data;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Data
 @Entity
 @Table(name = "category")

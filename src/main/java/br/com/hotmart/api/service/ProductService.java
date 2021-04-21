@@ -1,6 +1,6 @@
 package br.com.hotmart.api.service;
 
-import java.util.Objects;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -15,6 +15,11 @@ import br.com.hotmart.api.model.dto.ProductListDTO;
 import br.com.hotmart.api.repository.ProductRepository;
 import br.com.hotmart.api.utils.Utils;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Service
 public class ProductService {
 	
@@ -45,8 +50,8 @@ public class ProductService {
 	}
 
 	public ProductDTO findBy(Long id) {
-		Product product = repository.findById(id).get();
-		return Objects.nonNull(product) ? modelMapper.map(product, ProductDTO.class) : null;
+		Optional<Product> optional = repository.findById(id);
+		return optional.isPresent() ? modelMapper.map(optional.get(), ProductDTO.class) : null;
 	}
 
 }

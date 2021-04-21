@@ -13,6 +13,11 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Data
 @Entity
 @Table(name = "people")

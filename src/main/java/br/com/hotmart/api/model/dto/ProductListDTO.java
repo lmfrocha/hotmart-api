@@ -6,14 +6,17 @@ import org.springframework.data.domain.Page;
 
 import br.com.hotmart.api.model.Product;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
+/**
+ * 
+ * @author l.rocha
+ *
+ */
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProductListDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 

@@ -18,6 +18,11 @@ import com.sun.istack.NotNull;
 
 import lombok.Data;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Data
 @Entity
 @Table(name = "product")
@@ -33,7 +38,7 @@ public class Product implements Serializable {
 	private String name;
 
 	@NotNull
-	@Column(name = "description")
+	@Column(name = "description", nullable = false)
 	private String description;
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
@@ -42,7 +47,7 @@ public class Product implements Serializable {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
 	@Column(name = "score", nullable = true)

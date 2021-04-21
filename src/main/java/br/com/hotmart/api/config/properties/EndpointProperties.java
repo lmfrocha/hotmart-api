@@ -6,6 +6,11 @@ import java.util.Properties;
 
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Configuration
 public class EndpointProperties {
 	private Properties properties;

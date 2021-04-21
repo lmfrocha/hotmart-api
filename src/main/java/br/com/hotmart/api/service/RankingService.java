@@ -9,19 +9,21 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import br.com.hotmart.api.config.properties.EndpointProperties;
 import br.com.hotmart.api.model.Category;
 import br.com.hotmart.api.model.NewsCategory;
 import br.com.hotmart.api.model.Product;
-import br.com.hotmart.api.model.dto.NewsApiResponseDTO;
 import br.com.hotmart.api.repository.AssessmentRepository;
 import br.com.hotmart.api.repository.CategegoryRepository;
 import br.com.hotmart.api.repository.NewsCategoryRepository;
 import br.com.hotmart.api.repository.ProductRepository;
 import br.com.hotmart.api.web.NewsApiResponse;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Service
 public class RankingService {
 

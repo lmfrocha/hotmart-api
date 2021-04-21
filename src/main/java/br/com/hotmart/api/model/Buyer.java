@@ -10,6 +10,11 @@ import br.com.hotmart.api.model.enums.PeopleType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity

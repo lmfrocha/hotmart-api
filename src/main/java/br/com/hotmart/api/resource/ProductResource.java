@@ -23,6 +23,11 @@ import br.com.hotmart.api.repository.ProductRepository;
 import br.com.hotmart.api.service.ProductService;
 import br.com.hotmart.api.service.RankingService;
 
+/**
+ * 
+ * @author l.rocha
+ *
+ */
 @RestController
 @RequestMapping("/api/v1/product")
 public class ProductResource {
@@ -54,7 +59,7 @@ public class ProductResource {
 	@GetMapping("/id/{id}")
 	private ResponseEntity<ProductDTO> findById(@PathVariable("id") Long id){
 		ProductDTO productDTO = service.findBy(id);
-		return Objects.nonNull(productDTO) ? ResponseEntity.status(HttpStatus.OK).body(productDTO):ResponseEntity.notFound().build();
+		return Objects.nonNull(productDTO) ? ResponseEntity.status(HttpStatus.OK).body(productDTO) : ResponseEntity.notFound().build();
 	}
 	
 	@PutMapping("/id/{id}")
